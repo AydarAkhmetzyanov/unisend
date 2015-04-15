@@ -33,19 +33,19 @@ $dataStr='';
 for($i=0;$i<count($namekey);$i++){
 	$mysqli->query('alter ignore table `leads` add `'.$namekey[$i].'` varchar(255);');
 	$keyStr.=',`'.$namekey[$i].'`';
-	$dataStr.=',"'.$_POST[$namekey[$i]].'"';
+	$dataStr.=',"'.$mysqli->real_escape_string($_POST[$namekey[$i]]).'"';
 }
 	
 
 // insert lead to datebase
 $mysqli->query('insert into `leads` (`form_name`,`name`,`email`,`phone`,`state`,`time_insert`'.$keyStr.') 
 	values(
-		"'.$_POST['formname'].'",
-		"'.$_POST['name'].'",
-		"'.$_POST['email'].'",
-		"'.$_POST['phone'].'",
+		"'.$mysqli->real_escape_string($_POST['formname']).'",
+		"'.$mysqli->real_escape_string($_POST['name']).'",
+		"'.$mysqli->real_escape_string($_POST['email']).'",
+		"'.$mysqli->real_escape_string($_POST['phone']).'",
 		0,"'.date('Y-m-d H:i:s').'"
-		'.$dataStr.'
+		'.$mysqli->real_escape_string($dataStr).'
 	);
 ');
 file_get_contents('http://'.$_SERVER['NAME'].'/uniapi/php_worker.php');
