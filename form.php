@@ -8,6 +8,6 @@
 <body>
 <?php echo '123';?>
 
-<input onclick="uniapi_sendlead('test', 'Евгений', 'deph9172@gmail.com', '+79063332455', '');uniapi_sendlead('test', 'Евгений', 'depail.com', '+7905', '');" type="submit">
+<input onclick="uniapi_sendlead('test', 'Евгений', 'deph9172@gmail.com', '+843'+Math.random().toString(36).substring(7), '');" type="submit">
 </body>
 </html>

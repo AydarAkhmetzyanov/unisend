@@ -29,7 +29,7 @@ class b24{
             $senddata[$value] = $data[$key];
         }
 
-        $managers = (new Query())->select('unisend_leads')->where(array('manager_ID<>'=>0))->limit(1)->execute();
+        $managers = (new Query())->select('unisend_leads')->where(array('manager_ID<>'=>0,'phone'=>$data['phone']))->limit(1)->execute();
         if(empty($managers)){
             $managers = (new Query())->select('unisend_managers_forleads')->order_by('leadcount')->limit(1)->execute();
         }
@@ -41,7 +41,7 @@ class b24{
             $senddata['SOURCE_ID']=$this->source_names['other'];
         }
 
-        $senddata['PHONE_WORK']=str_replace(array('+','-','(',')',' '),array('','','','',''),$data['phone']);
+        $senddata['PHONE_WORK']=$data['phone'];
         $senddata['EMAIL_WORK']=$data['email'];
         $senddata['COMMENTS']=$data['data'];
         $senddata['TITLE']='Сайт: '.$data['domain'].' Заявка с формы:'.$data['formname'].' - '.$data['name'].' : '.$data['timestamp'];
@@ -54,16 +54,19 @@ class b24{
             }
         }
 
-        $query = 'UPDATE `unisend_managers_forleads` set `leadcount`=`leadcount`+1 where `manager_ID`='.mysql_real_escape_string($senddata['ASSIGNED_BY_ID']);
+        $query = 'UPDATE `unisend_managers_forleads` set `leadcount`=`leadcount`+1 where `manager_ID`=:ASSIGNED_BY_ID';
         try{
             $statement = Database::getInstance()->prepare($query);
+            $statement->bindParam(':ASSIGNED_BY_ID', $senddata['ASSIGNED_BY_ID']);
             $statement->execute();
         } catch(PDOException $e) {
             exit($e->getMessage().' SQL query: '.$query);
         }
-        $query = 'UPDATE `unisend_leads` set manager_ID='.mysql_real_escape_string($senddata['ASSIGNED_BY_ID']).' where id='.mysql_real_escape_string($data['id']);
+        $query = 'UPDATE `unisend_leads` set manager_ID=:ASSIGNED_BY_ID where id=:id';
         try{
             $statement = Database::getInstance()->prepare($query);
+            $statement->bindParam(':ASSIGNED_BY_ID', $senddata['ASSIGNED_BY_ID']);
+            $statement->bindParam(':id', $data['id']);
             $statement->execute();
         } catch(PDOException $e) {
             exit($e->getMessage().' SQL query: '.$query);

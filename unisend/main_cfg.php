@@ -7,9 +7,9 @@ error_reporting(E_ALL);
 define('DS', DIRECTORY_SEPARATOR);
 
 define('DB_HOST','cdfservices.cloudapp.net');
-define('DB_USER','gentlz');
-define('DB_PASS','gentlzpsw');
-define('DB_NAME','gentlz');
+define('DB_USER','test');
+define('DB_PASS','test');
+define('DB_NAME','test');
 
 $connectors=array('b24');
 
