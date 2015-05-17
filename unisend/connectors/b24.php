@@ -93,7 +93,8 @@ class b24{
             //just ignore existance
         }
         //if empty users add user
-        if(empty((new Query())->select('unisend_managers_forleads')->execute())){
+        $unisend_managers_forleads = (new Query())->select('unisend_managers_forleads')->execute();
+        if(empty($unisend_managers_forleads)){
             foreach ($this->managers as $manager) {
                 (new Query())->insert('unisend_managers_forleads',array('manager_ID'=>$manager))->execute();
             }
