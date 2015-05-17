@@ -1,6 +1,6 @@
 <?php
 
-class uniapi{
+class b24{
 	public $login;
 	public $pass;
 	public $b24;
