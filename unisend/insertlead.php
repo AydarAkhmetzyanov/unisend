@@ -53,7 +53,7 @@ $fields=array('formname','name','email','phone','data','referrer','domain','dete
 
 $insert_data['phone'] = str_replace(array('+','-','(',')',' '),array('','','','',''),$insert_data['phone']);
 
-$leads = (new Query())->select('unisend_leads')->where(array('phone'=>$insert_data['phone']))->additional_where('`timestamp` >= DATE_SUB(NOW(),INTERVAL 1 HOUR)')->limit(1)->execute();
+$leads = (new Query())->select('unisend_leads')->where(array('phone'=>$insert_data['phone'],'formname'=>$insert_data['formname'],'domain'=>$insert_data['domain']))->additional_where('`timestamp` >= DATE_SUB(NOW(),INTERVAL 1 HOUR)')->limit(1)->execute();
 if(empty($leads)){
 	(new Query())->insert('unisend_leads',$insert_data)->execute();
 }
