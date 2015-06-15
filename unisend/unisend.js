@@ -35,25 +35,27 @@ function uniapi_sendlead(formname, name, email, phone, data){
 	jQuery.ajax({
 			url:     "/unisend/insertlead.php",
 			type:     "POST",
+			async:   false
 			cache: false,
 			data: dataStr,
 			success: function(response) {
 				console.log(response);
-        },
-        error: function(response) {
-			console.error(response);
-        }
+	        },
+	        error: function(response) {
+				console.error(response);
+	        }
 	});
 	jQuery.ajax({
 			url:     "/unisend/php_worker.php",
 			type:     "GET",
+			async:   false
 			cache: false,
 			success: function(response) {
 				console.log(response);
-        },
-        error: function(response) {
-			console.error(response);
-        }
+	        },
+	        error: function(response) {
+				console.error(response);
+	        }
 	});
 	return true;
 }

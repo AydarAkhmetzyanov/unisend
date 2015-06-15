@@ -6,8 +6,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 <body>
-<?php echo '123';?>
 
-<input onclick="uniapi_sendlead('test', 'Евгений', 'deph9172@gmail.com', '+843'+Math.random().toString(36).substring(7), '');" type="submit">
+
+<input onclick="uniapi_sendlead('test', 'Евгений', 'deph9172@gmail.com', '+843'+Math.random().toString(36).substring(7), '');alert('works');" type="submit">
 </body>
 </html>
