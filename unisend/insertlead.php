@@ -31,6 +31,7 @@ $query = 'create table if not exists `unisend_leads` (
 		)';
 try{
 	$statement = Database::getInstance()->prepare($query);
+	$statement->closeCursor();
 	$statement->execute();
 } catch(PDOException $e) {
 	exit($e->getMessage().' SQL query: '.$query);
