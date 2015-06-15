@@ -35,7 +35,7 @@ function uniapi_sendlead(formname, name, email, phone, data){
 	jQuery.ajax({
 			url:     "/unisend/insertlead.php",
 			type:     "POST",
-			async:   false
+			async:   false,
 			cache: false,
 			data: dataStr,
 			success: function(response) {
@@ -48,7 +48,7 @@ function uniapi_sendlead(formname, name, email, phone, data){
 	jQuery.ajax({
 			url:     "/unisend/php_worker.php",
 			type:     "GET",
-			async:   false
+			async:   false,
 			cache: false,
 			success: function(response) {
 				console.log(response);
