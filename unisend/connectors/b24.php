@@ -4,9 +4,9 @@ class b24{
 
     //config
     private $login='administrator@creativestripe.ru';
-    private $pass='6wwziz';
+    private $pass='';
     private $host='creativestripe.bitrix24.ru';
-    private $managers=array(7,1); //userid for leads if table empty
+    private $managers=array(1); //1 is admin, userid for leads if table empty
     // source ids
     private $source_names=array('other'=>'SELF','yandex_direct'=>'other','adwords'=>'1','vk'=>'2'); //self is default source in bitrix, self always exists. if source recognized by source detector assign detected source to bitrix source
     // additional unrequired data
@@ -72,7 +72,6 @@ class b24{
             exit($e->getMessage().' SQL query: '.$query);
         }
 
-        print_r($senddata);
         return true;
     }
 
@@ -142,7 +141,6 @@ class b24{
             $json = str_replace($json_i, $json_o, $response[1]);
 
             $result = json_decode($json, true);
-            print_r($result);
             if($result['error'] != 201) {
                 return false;
             }
